@@ -29,6 +29,12 @@ img {
   margin-bottom: 16px;
 }
 
+#search-box:focus,
+#search-box:hover {
+  border: 2px solid #2196f3;
+  outline: none;
+}
+
 .country__item {
   display: flex;
   align-items: center;

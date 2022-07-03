@@ -1,12 +1,7 @@
- return Notify.failure('Oops, there is no country with that name');
-
 import './css/styles.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import debounce from 'lodash.debounce';
 import { fetchCountries } from './fetchCountries';
-
-
-const debounce = require('lodash.debounce');
 
 const DEBOUNCE_DELAY = 300;
 const searchForm = document.querySelector('input#search-box');
@@ -55,7 +50,7 @@ function renderCountryCard(countries) {
     const markupCard = countries
     .map(({flags, name, capital, population, languages}) => {
     return `
-        <p><img src="${flags.svg}"> ${name.official}</p>
+        <p class="country__name"><img src="${flags.svg}"> ${name.official}</p>
         <p><span>Capital</span>: ${capital}</p>
         <p><span>Population</span>: ${population}</p>
         <p><span>Languages</span>: ${Object.values(languages).join(',')}</p>

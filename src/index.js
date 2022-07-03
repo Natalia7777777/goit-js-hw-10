@@ -5,7 +5,7 @@ import { fetchCountries } from './fetchCountries';
 
 const DEBOUNCE_DELAY = 300;
 const searchForm = document.querySelector('input#search-box');
-const countryList = document.querySelector('country-list');
+const countryList = document.querySelector('.country-list');
 const countryCard = document.querySelector('.country-info');
 
 searchForm.addEventListener('input', debounce(onSearch, DEBOUNCE_DELAY));
@@ -26,10 +26,12 @@ function countryInfo(countries) {
     if (countries.length > 10) {
         resetInfo();
         return Notify.info('Too many matches found. Please enter a more specific name.');
-    } else if (countries.length > 1) {
+    }
+    if (countries.length > 1 && countries.length <= 10) {
         resetInfo();
         renderCountryList(countries);
-    } else if (countries.length === 1) {
+    }
+    if (countries.length === 1) {
         resetInfo();
         renderCountryCard(countries);
     }
@@ -38,8 +40,8 @@ function countryInfo(countries) {
 function renderCountryList(countries) {
     const markupList = countries
     .map(({flags, name}) => {
-    return `<li>
-        <p class="country__name"><img src="${flags.svg}" width="25" height="25">${name.official}</p>
+    return `<li class="country__item">
+        <p class="country-item__name"><img src="${flags.svg}" width="25" height="25">${name.official}</p>
         </li>`;
     })
         .join("");
@@ -50,14 +52,14 @@ function renderCountryCard(countries) {
     const markupCard = countries
     .map(({flags, name, capital, population, languages}) => {
     return `
-        <p class="country__name"><img src="${flags.svg}"> ${name.official}</p>
-        <p><span>Capital</span>: ${capital}</p>
-        <p><span>Population</span>: ${population}</p>
-        <p><span>Languages</span>: ${Object.values(languages).join(',')}</p>
+        <p class="country-info__name"><img src="${flags.svg}" width="25" height="25"> ${name.official}</p>
+        <p class="country-info__descr"><span>Capital</span>: ${capital}</p>
+        <p class="country-info__descr"><span>Population</span>: ${population}</p>
+        <p class="country-info__descr"><span>Languages</span>: ${Object.values(languages).join(',')}</p>
         `;
     })
         .join("");
-    countryCard = markupCard;
+    countryCard.innerHTML = markupCard;
 }
 
 function resetInfo() {
@@ -65,7 +67,7 @@ function resetInfo() {
     countryCard.innerHTML = '';
 }
 
-function onError(error) {
+function onError() {
     resetInfo();
     Notify.failure('Oops, there is no country with that name');
 }

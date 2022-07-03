@@ -12,6 +12,16 @@ body {
   line-height: 1.5;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  margin-right: 10px;
+}
+
 #search-box {
   font: inherit;
   padding: 8px;
@@ -19,7 +29,23 @@ body {
   margin-bottom: 16px;
 }
 
-.country__name {
+.country__item {
   display: flex;
   align-items: center;
+}
+
+.country-item__name,
+.country-info__name {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}
+
+.country-info__name {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.country-info__descr span {
+  font-weight: bold;
 }
